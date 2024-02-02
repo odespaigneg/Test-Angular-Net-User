@@ -1,0 +1,48 @@
+<div>
+    <div class="submit-form">
+        @if (!submitted) {
+            <div>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    required
+                    [(ngModel)]="user.name"
+                    name="name"
+                  />
+                </div>
+          
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input
+                    class="form-control"
+                    id="lastName"
+                    required
+                    [(ngModel)]="user.lastName"
+                    name="lastName"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    class="form-control"
+                    id="email"
+                    required
+                    [(ngModel)] = "user.email"
+                    name="lastName"
+                  />
+                </div>
+                <button (click)="saveUser()" class="btn btn-success">Submit</button>
+            </div>
+        }   
+        @else {
+            <div>
+                <h4>Tutorial was submitted successfully!</h4>
+                <button class="btn btn-success" (click)="newUser()">Add</button>
+            </div>
+        }      
+    </div>
+  </div>
