@@ -36,7 +36,7 @@ export class UsersComponent {
     this.currentIndex = -1;
   }
 
-  changeViewmodel(): void{
+  changeViewmode(): void{
     console.log(this.viewMode);
     this.viewMode = !this.viewMode;
     console.log(this.viewMode);

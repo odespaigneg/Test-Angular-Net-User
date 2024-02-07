@@ -8,11 +8,11 @@
             </li>
         }        
       </ul>
-      <button (click)="changeViewmode">Change ViewMode</button>
+      <input type="button" (click)="changeViewmode()" title="Change ViewMode" value="Change ViewMode">
     </div>
     <div class="col-md-6">
       <app-user-details
-        [viewMode]="viewModel"
+        [viewMode]="viewMode"
         [currentUser]="currentUser"></app-user-details>
     </div>
   </div>
