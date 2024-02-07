@@ -14,6 +14,7 @@ export class UsersComponent {
   users?: User[];
   currentUser: User = { name: '', lastName: '', email: ''};
   currentIndex = -1;
+  viewMode = false;
 
   constructor(private userService: UserService) {
     this.retrieveUsers();
@@ -33,6 +34,12 @@ export class UsersComponent {
     this.retrieveUsers();
     this.currentUser = { name: '', lastName: '', email: ''};
     this.currentIndex = -1;
+  }
+
+  changeViewmodel(): void{
+    console.log(this.viewMode);
+    this.viewMode = !this.viewMode;
+    console.log(this.viewMode);
   }
 
   setActiveUser(user: User, index: number): void {

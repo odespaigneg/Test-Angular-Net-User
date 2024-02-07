@@ -1,6 +1,6 @@
 ﻿namespace UserApi.Dtos
 {
-    public class UserDto
+    public class UserRequest
     {
         public string Name { get; set; } = string.Empty;
 

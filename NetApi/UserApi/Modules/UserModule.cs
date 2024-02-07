@@ -14,7 +14,16 @@ namespace UserApi.Modules
             app.MapGet("/users", async (ApplicationDbContext _dbContext) =>
             {
                 var users = await _dbContext.Users.ToListAsync();
-                return Results.Ok(users);
+
+                var usersDto = users.Select(u => new UserResponse
+                {
+                    Email = u.Email,
+                    LastName = u.LastName,
+                    Name = u.Name,
+                    Id = u.Id
+                });
+
+                return Results.Ok(usersDto);
             });
 
             app.MapGet("/users/{id}", async (long id, ApplicationDbContext _dbContext) =>
@@ -23,11 +32,12 @@ namespace UserApi.Modules
 
                 if (user is not null)
                 {
-                    var userDto = new UserDto
+                    var userDto = new UserResponse
                     {
                         LastName = user.LastName,
                         Name = user.Name,
-                        Email = user.Email
+                        Email = user.Email,
+                        Id = user.Id
                     };
 
                     return Results.Ok(userDto);
@@ -36,7 +46,7 @@ namespace UserApi.Modules
                 return Results.NotFound();
             });
 
-            app.MapPut("/users/{id}", async (long id, [FromBody] UserDto userDto, ApplicationDbContext _dbContext) =>
+            app.MapPut("/users/{id}", async (long id, [FromBody] UserRequest userDto, ApplicationDbContext _dbContext) =>
             {
                 var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -54,7 +64,7 @@ namespace UserApi.Modules
                 return Results.NotFound();
             });
 
-            app.MapPost("/users", async ([FromBody] UserDto userDto, ApplicationDbContext _dbContext) =>
+            app.MapPost("/users", async ([FromBody] UserRequest userDto, ApplicationDbContext _dbContext) =>
             {
                 var user = new User()
                 {
